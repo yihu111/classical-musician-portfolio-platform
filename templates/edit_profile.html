@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2>Edit Profile</h2>
+<form method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="{{ musician['name'] }}" required><br>
+
+    <label for="instrument">Instrument:</label>
+    <input type="text" name="instrument" value="{{ musician['instrument'] }}" required><br>
+
+    <label for="bio">Bio:</label>
+    <textarea name="bio">{{ musician['bio'] }}</textarea><br>
+
+    <label for="password">Current Password:</label>
+    <input type="password" name="password" required><br>
+
+    <label for="new_password">New Password (leave empty to keep current):</label>
+    <input type="password" name="new_password"><br>
+
+    <label for="confirmation">Confirm New Password:</label>
+    <input type="password" name="confirmation"><br>
+
+    <button type="submit">Update Profile</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2>Search Musicians</h2>
+<form method="GET" action="{{ url_for('index') }}">
+    <input type="text" name="search" value="{{ search_query }}" placeholder="Search by username">
+    <button type="submit">Search</button>
+</form>
+
+{% if musicians %}
+    <h2 style="margin-top: 20px;">Musicians</h2>
+    <ul>
+        {% for musician in musicians %}
+            <li>
+                <a href="{{ url_for('profile', musician_id=musician['id']) }}">
+                    {{ musician['username'] }} - {{ musician['name'] }} ({{ musician['instrument'] }})
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% elif searched %}
+    <p style="margin-top: 20px;">No musicians found.</p>
+{% endif %}
+
+{% endblock %}

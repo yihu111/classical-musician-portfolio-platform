@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2>{{ musician['name'] }}</h2>
+<p><strong>Username:</strong> {{ musician['username'] }}</p>
+<p><strong>Instrument:</strong> {{ musician['instrument'] }}</p>
+<p><strong>Bio:</strong> {{ musician['bio'] }}</p>
+
+{% if 'user_id' in session and session['user_id'] == musician['id'] %}
+    <h3 style="margin-top: 20px;">Pieces</h3>
+    <ul>
+        {% for piece in pieces %}
+            <li>
+                {{ piece['title'] }} by {{ piece['composer'] }} (firstly rehearsed {{ piece['year'] }})
+                <form action="{{ url_for('delete_piece', piece_id=piece['id']) }}" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('add_piece') }}">Add New Piece</a>
+{% else %}
+    <h3 style="margin-top: 20px;">Pieces</h3>
+    <ul>
+        {% for piece in pieces %}
+            <li>{{ piece['title'] }} by {{ piece['composer'] }} ({{ piece['year'] }})</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}
